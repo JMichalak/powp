@@ -1,38 +1,51 @@
 package edu.iis.powp.factory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import edu.iis.powp.command.*;
 
 public class CommandFactory {
 
+	private static CommandFactory instance = new CommandFactory();
+	
 	private Map<String, CommandStruct> commandsSet;
 
+	private CommandFactory() {
+		commandsSet = new HashMap<>();
+	}
+	
 	/**
 	 * 
 	 * @param String
 	 * @param IPlotterCommand
 	 * @param CommandType
 	 */
-	public void addCommand(int String, int IPlotterCommand, int CommandType) {
-		// TODO - implement CommandFactory.addCommand
-		throw new UnsupportedOperationException();
+	public void addCommand(String key, IPlotterCommand command, CommandType type) {
+		commandsSet.put(key, new CommandStruct(command, type));
 	}
 
 	/**
 	 * 
 	 * @param String
 	 */
-	public IPlotterCommand getCommand(int String) {
-		// TODO - implement CommandFactory.getCommand
-		throw new UnsupportedOperationException();
+	public IPlotterCommand getCommand(String key) {
+		return commandsSet.get(key).getCommand();
 	}
 
 	/**
 	 * 
 	 * @param CommandType
 	 */
-	public List<IPlotterCommand> getCommands(int CommandType) {
-		// TODO - implement CommandFactory.getCommands
-		throw new UnsupportedOperationException();
+	public List<IPlotterCommand> getCommands(CommandType type) {
+		List<IPlotterCommand> commands = new ArrayList<>();
+		commandsSet.forEach((k, v) -> {
+			if (v.getType().equals(type))
+				commands.add(v.getCommand());
+		});
+		return commands;
 	}
 
 	/**
@@ -53,9 +66,8 @@ public class CommandFactory {
 		throw new UnsupportedOperationException();
 	}
 
-	public CommandFactory getInstance() {
-		// TODO - implement CommandFactory.getInstance
-		throw new UnsupportedOperationException();
+	public static CommandFactory getInstance() {
+		return instance;
 	}
 
 }

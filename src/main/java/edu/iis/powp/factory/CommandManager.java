@@ -1,22 +1,27 @@
 package edu.iis.powp.factory;
 
+import edu.iis.powp.command.IPlotterCommand;
+
 public class CommandManager {
 
-	CommandBuilder commandBuilder;
-	CommandFactory commandFactory;
+	private CommandFactory commandFactory;
 
-	public CommandFactory getFactory() {
-		// TODO - implement CommandManager.getFactory
-		throw new UnsupportedOperationException();
+	public CommandManager() {
+		commandFactory = CommandFactory.getInstance();
 	}
-
+	
+	public CommandFactory getFactory() {
+		return commandFactory;
+	}
+	
 	/**
 	 * 
 	 * @param IPlotterCommand
 	 */
-	public CommandBuilder newCommand(int IPlotterCommand) {
-		// TODO - implement CommandManager.newCommand
-		throw new UnsupportedOperationException();
+	public CommandBuilder newCommand(IPlotterCommand command) {
+		CommandBuilder builder = new CommandBuilder();
+		builder.addCommand(command);
+		return builder;
 	}
 
 }

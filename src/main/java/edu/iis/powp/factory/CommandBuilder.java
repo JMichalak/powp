@@ -1,5 +1,8 @@
 package edu.iis.powp.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.iis.powp.command.*;
 
 public class CommandBuilder {
@@ -8,14 +11,19 @@ public class CommandBuilder {
 	 * 
 	 * @param IPlotterCommand
 	 */
-	public CommandBuilder addCommand(int IPlotterCommand) {
-		// TODO - implement CommandBuilder.addCommand
-		throw new UnsupportedOperationException();
+	private List<IPlotterCommand> commands;
+	
+	public CommandBuilder() {
+		commands = new ArrayList<>();
+	}
+	
+	public CommandBuilder addCommand(IPlotterCommand command) {
+		commands.add(command);
+		return this;
 	}
 
 	public ComplexCommand build() {
-		// TODO - implement CommandBuilder.build
-		throw new UnsupportedOperationException();
+		return new ComplexCommand(commands);
 	}
 
 }
