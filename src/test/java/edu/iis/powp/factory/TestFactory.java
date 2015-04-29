@@ -129,6 +129,68 @@ public class TestFactory {
 		    }
 		});
 		
+		final int roz = 1000;
+		
+		context.addTest("SinModify", new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	IPlotterCommand firstComand = new SetPositionCommand(-1000, 0);
+				CommandBuilder builder = manager.newCommand(firstComand);
+				
+				for(int i=-1000;i<1000;i+=10)
+				{
+					builder.addCommand(new DrawToCommand(i,(int)(Math.sin(i)*roz/i)));
+					builder.addCommand(new SetPositionCommand(i,(int)(Math.sin(i)*roz/i)));
+				}
+				
+				ComplexCommand firstComplex = builder.build();
+				factory.addCommand("SinModify", firstComplex, CommandType.circle);
+				factory.getCommand("SinModify").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+		    }
+		});
+		
+		context.addTest("Tangens", new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	IPlotterCommand firstComand = new SetPositionCommand(-1000, 0);
+				CommandBuilder builder = manager.newCommand(firstComand);
+				
+				for(int i=-1000*roz;i<1000*roz;i+=10)
+				{
+					builder.addCommand(new DrawToCommand(i,(int)(Math.tan(i)*100)));
+					builder.addCommand(new SetPositionCommand(i,(int)(Math.tan(i)*100)));
+				}
+				
+				ComplexCommand firstComplex = builder.build();
+				factory.addCommand("Tangens", firstComplex, CommandType.circle);
+				factory.getCommand("Tangens").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+		    }
+		});
+		
+		context.addTest("Sinus", new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	IPlotterCommand firstComand = new SetPositionCommand(-1000, 0);
+				CommandBuilder builder = manager.newCommand(firstComand);
+				
+				for(int i=-1000;i<1000;i+=20)
+				{
+					builder.addCommand(new DrawToCommand(i,(int)(Math.sin(i)*100)));
+					builder.addCommand(new SetPositionCommand(i,(int)(Math.sin(i)*100)));
+				}
+				
+				ComplexCommand firstComplex = builder.build();
+				factory.addCommand("Sinus", firstComplex, CommandType.circle);
+				factory.getCommand("Sinus").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+		    }
+		});
+		
 	}
 
 }
