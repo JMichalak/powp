@@ -2,11 +2,8 @@ package edu.iis.powp.factory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.app.ApplicationWithDrawer;
@@ -16,7 +13,6 @@ import edu.iis.powp.command.ComplexCommand;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
-import edu.iis.powp.gui.event.predefine.SelectTestFigureOptionListener;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.line.BasicLine;
 
@@ -69,8 +65,8 @@ public class TestFactory {
 				CommandBuilder builder = manager.newCommand(firstComand);
 				builder.addCommand(secondCommmand);
 				ComplexCommand firstComplex = builder.build();
-				factory.addCommand("test", firstComplex, CommandType.circle);
-				factory.getCommand("test").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+				factory.addCommand("test1", firstComplex, CommandType.circle);
+				factory.getCommand("test1").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
 			}
 			
 		});	        
@@ -95,8 +91,7 @@ public class TestFactory {
 		    }
 		});
 		
-		
-		
+
 		context.addTest("Test 2", new ActionListener()
 		{
 		    @Override
@@ -107,10 +102,34 @@ public class TestFactory {
 				CommandBuilder builder = manager.newCommand(firstComand);
 				builder.addCommand(secondCommmand);
 				ComplexCommand firstComplex = builder.build();
-				factory.addCommand("test", firstComplex, CommandType.circle);
-				factory.getCommand("test").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+				factory.addCommand("test2", firstComplex, CommandType.circle);
+				factory.getCommand("test2").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
 		    }
 		});
+		
+		context.addTest("Kolko", new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	IPlotterCommand firstComand = new SetPositionCommand(0, 0);
+				CommandBuilder builder = manager.newCommand(firstComand);
+				for (int i = 0; i<36000; ++i) {
+					builder.addCommand(new SetPositionCommand(
+							(int)(Math.round(Math.sin(i*0.01)*199)),
+							(int)(Math.round(Math.cos(i*0.01)*199))
+							));
+					builder.addCommand(new DrawToCommand(
+							(int)(Math.round(Math.sin(i*0.01)*200)),
+							(int)(Math.round(Math.cos(i*0.01)*200))
+							));
+				}
+				ComplexCommand command = builder.build();
+				factory.addCommand("kolko", command, CommandType.circle);
+				factory.getCommand("kolko").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+		    }
+		});
+		
 	}
 
 }
