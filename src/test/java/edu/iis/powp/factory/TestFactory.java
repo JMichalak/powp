@@ -84,6 +84,7 @@ public class TestFactory {
 				
 				CommandBuilder builder = manager.newCommand(firstComand);
 				builder.addCommand(new DrawToCommand(100, 0));
+				builder.addCommand(new DrawToCommand(100, 0));
 				builder.addCommand(new DrawToCommand(0,60));
 				builder.addCommand(new DrawToCommand(50,-40));
 				builder.addCommand(new DrawToCommand(100,60));
