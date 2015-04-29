@@ -75,6 +75,27 @@ public class TestFactory {
 			
 		});	        
 
+		context.addTest("Znaczek", new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	IPlotterCommand firstComand = new SetPositionCommand(0, 0);
+				
+				CommandBuilder builder = manager.newCommand(firstComand);
+				builder.addCommand(new DrawToCommand(100, 0));
+				builder.addCommand(new DrawToCommand(0,60));
+				builder.addCommand(new DrawToCommand(50,-40));
+				builder.addCommand(new DrawToCommand(100,60));
+				builder.addCommand(new DrawToCommand(0,0));
+				ComplexCommand firstComplex = builder.build();
+				factory.addCommand("znaczek", firstComplex, CommandType.circle);
+				factory.getCommand("znaczek").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+		    }
+		});
+		
+		
+		
 		context.addTest("Test 2", new ActionListener()
 		{
 		    @Override
