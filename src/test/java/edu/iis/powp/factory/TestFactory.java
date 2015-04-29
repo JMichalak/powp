@@ -212,8 +212,6 @@ public class TestFactory {
 		    }
 		});
 		
-		final int roz = 1000;
-		
 		context.addTest("SinModify", new ActionListener()
 		{
 		    @Override
