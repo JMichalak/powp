@@ -30,9 +30,17 @@ public class CommandFactory {
 	/**
 	 * 
 	 * @param String
+	 * @throws CloneNotSupportedException 
 	 */
-	public IPlotterCommand getCommand(String key) {
-		return commandsSet.get(key).getCommand();
+	public IPlotterCommand getCommand(String key){
+		IPlotterCommand command = null;
+		try {
+			command = commandsSet.get(key).clone().getCommand();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return command;
 	}
 
 	/**
@@ -43,7 +51,12 @@ public class CommandFactory {
 		List<IPlotterCommand> commands = new ArrayList<>();
 		commandsSet.forEach((k, v) -> {
 			if (v.getType().equals(type))
-				commands.add(v.getCommand());
+				try {
+					commands.add(v.clone().getCommand());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		});
 		return commands;
 	}

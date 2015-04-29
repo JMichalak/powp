@@ -91,6 +91,7 @@ public class TestFactory {
 		    }
 		});
 		
+
 		context.addTest("Test 2", new ActionListener()
 		{
 		    @Override
@@ -190,6 +191,7 @@ public class TestFactory {
 				factory.getCommand("Sinus").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
 		    }
 		});
+		
 		
 	}
 
