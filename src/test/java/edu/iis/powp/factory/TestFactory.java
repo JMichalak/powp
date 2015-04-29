@@ -69,8 +69,8 @@ public class TestFactory {
 				CommandBuilder builder = manager.newCommand(firstComand);
 				builder.addCommand(secondCommmand);
 				ComplexCommand firstComplex = builder.build();
-				factory.addCommand("test", firstComplex, CommandType.circle);
-				factory.getCommand("test").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+				factory.addCommand("test1", firstComplex, CommandType.circle);
+				factory.getCommand("test1").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
 			}
 			
 		});	        
@@ -85,10 +85,34 @@ public class TestFactory {
 				CommandBuilder builder = manager.newCommand(firstComand);
 				builder.addCommand(secondCommmand);
 				ComplexCommand firstComplex = builder.build();
-				factory.addCommand("test", firstComplex, CommandType.circle);
-				factory.getCommand("test").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+				factory.addCommand("test2", firstComplex, CommandType.circle);
+				factory.getCommand("test2").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
 		    }
 		});
+		
+		context.addTest("Kolko", new ActionListener()
+		{
+		    @Override
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	IPlotterCommand firstComand = new SetPositionCommand(0, 0);
+				CommandBuilder builder = manager.newCommand(firstComand);
+				for (int i = 0; i<36000; ++i) {
+					builder.addCommand(new SetPositionCommand(
+							(int)(Math.round(Math.sin(i*0.01)*199)),
+							(int)(Math.round(Math.cos(i*0.01)*199))
+							));
+					builder.addCommand(new DrawToCommand(
+							(int)(Math.round(Math.sin(i*0.01)*200)),
+							(int)(Math.round(Math.cos(i*0.01)*200))
+							));
+				}
+				ComplexCommand command = builder.build();
+				factory.addCommand("kolko", command, CommandType.circle);
+				factory.getCommand("kolko").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+		    }
+		});
+		
 	}
 
 }
