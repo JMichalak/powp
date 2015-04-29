@@ -2,11 +2,8 @@ package edu.iis.powp.factory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.iis.client.plottermagic.IPlotter;
-import edu.iis.client.plottermagic.preset.FiguresJoe;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
 import edu.iis.powp.app.Application;
 import edu.iis.powp.app.ApplicationWithDrawer;
@@ -16,7 +13,6 @@ import edu.iis.powp.command.ComplexCommand;
 import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
-import edu.iis.powp.gui.event.predefine.SelectTestFigureOptionListener;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.line.BasicLine;
 
