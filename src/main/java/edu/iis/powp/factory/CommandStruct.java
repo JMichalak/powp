@@ -1,9 +1,15 @@
 package edu.iis.powp.factory;
 
+import java.io.Serializable;
+
 import edu.iis.powp.command.IPlotterCommand;
 
-public class CommandStruct implements Cloneable {
+public class CommandStruct implements Cloneable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5521547335076137963L;
 	private IPlotterCommand command;
 	private CommandType type;
 	

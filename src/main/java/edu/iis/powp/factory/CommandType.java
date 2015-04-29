@@ -1,5 +1,7 @@
 package edu.iis.powp.factory;
 
-public enum CommandType {
+import java.io.Serializable;
+
+public enum CommandType implements Serializable {
 	square, circle, triangle, line
 }

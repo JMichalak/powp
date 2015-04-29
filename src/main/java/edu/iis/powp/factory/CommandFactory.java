@@ -1,17 +1,23 @@
 package edu.iis.powp.factory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.iis.powp.command.*;
+import edu.iis.powp.command.IPlotterCommand;
 
 public class CommandFactory {
 
 	private static CommandFactory instance = new CommandFactory();
 	
-	private Map<String, CommandStruct> commandsSet;
+	protected Map<String, CommandStruct> commandsSet;
 
 	private CommandFactory() {
 		commandsSet = new HashMap<>();
@@ -37,7 +43,6 @@ public class CommandFactory {
 		try {
 			command = commandsSet.get(key).clone().getCommand();
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return command;
@@ -54,7 +59,6 @@ public class CommandFactory {
 				try {
 					commands.add(v.clone().getCommand());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		});
@@ -65,18 +69,35 @@ public class CommandFactory {
 	 * 
 	 * @param String
 	 */
-	public Map<String, CommandStruct> importCommands(int String) {
-		// TODO - implement CommandFactory.importCommands
-		throw new UnsupportedOperationException();
+	@SuppressWarnings("unchecked")
+	public Map<String, CommandStruct> importCommands(String filePath) {
+		
+		Map<String, CommandStruct> commands = null;
+		try (ObjectInputStream input = new ObjectInputStream( new FileInputStream(filePath) )) {
+			commands = (Map<String, CommandStruct>) input.readObject();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return commands;
+		
 	}
 
 	/**
 	 * 
 	 * @param String
 	 */
-	public void export(int String) {
-		// TODO - implement CommandFactory.export
-		throw new UnsupportedOperationException();
+	public void exportCommands(String filePath) {
+		try (ObjectOutputStream output = new ObjectOutputStream( new FileOutputStream(filePath) )) {
+			output.writeObject(commandsSet);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static CommandFactory getInstance() {
