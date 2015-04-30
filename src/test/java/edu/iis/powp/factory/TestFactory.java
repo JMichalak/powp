@@ -1,7 +1,10 @@
 package edu.iis.powp.factory;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JFileChooser;
 
 import edu.iis.client.plottermagic.IPlotter;
 import edu.iis.powp.adapter.LineAdapterPlotterDriver;
@@ -149,20 +152,24 @@ public class TestFactory {
 		CommandManager manager = new CommandManager();
 		CommandFactory factory = manager.getFactory();
 
-		final String COMMANDS_FILE_PATH = "commands";
-		
 		context.addComponentMenuElement(DrawPanelController.class, "Save", new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				factory.exportCommands(COMMANDS_FILE_PATH);
+				JFileChooser fileChooser = new JFileChooser();
+				if (fileChooser.showSaveDialog(Application.getComponent(Component.class)) == JFileChooser.APPROVE_OPTION) {
+				  factory.exportCommands( fileChooser.getSelectedFile().getPath() );
+				}
 			}
 		}, false);
 		context.addComponentMenuElement(DrawPanelController.class, "Load", new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				factory.commandsSet.putAll( factory.importCommands(COMMANDS_FILE_PATH) );
+				JFileChooser fileChooser = new JFileChooser();
+				if (fileChooser.showOpenDialog(Application.getComponent(Component.class)) == JFileChooser.APPROVE_OPTION) {
+					factory.commandsSet.putAll( factory.importCommands(fileChooser.getSelectedFile().getPath()) );
+				}
 				factory.commandsSet.forEach((k, v)->{
 					context.addTest(k, new ActionListener() {
 						
