@@ -3,7 +3,7 @@ package edu.iis.powp.factory;
 import edu.iis.powp.command.IPlotterCommand;
 
 /**
- * CommandManager offers interface for creating and adding commands.
+ * CommandManager provides interface for creating and adding commands.
  * @author Grupa 6
  * @see ComplexCommand, IPlotterCommand, CommandFactory
  */
