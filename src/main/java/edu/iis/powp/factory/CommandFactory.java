@@ -13,28 +13,37 @@ import java.util.Map;
 
 import edu.iis.powp.command.IPlotterCommand;
 
+/**
+ * CommandFactory controls CommandFactory instance, stores all commands, allowing add, save and load them from file. 
+ * @author Grupa 6
+ * @see CommandManager, CommandBuilder, ComplexCommand, IPlotterCommand
+ */
 public class CommandFactory {
 
 	private static CommandFactory instance = new CommandFactory();
 	
+	/**
+	 * 
+	 */
 	protected Map<String, CommandStruct> commandsSet;
 
 	private CommandFactory() {
 		commandsSet = new HashMap<>();
 	}
 	
+
 	/**
-	 * 
-	 * @param String
-	 * @param IPlotterCommand
-	 * @param CommandType
+	 * Allows to add new command.
+	 * @param key
+	 * @param command
+	 * @param type
 	 */
 	public void addCommand(String key, IPlotterCommand command, CommandType type) {
 		commandsSet.put(key, new CommandStruct(command, type));
 	}
 
 	/**
-	 * 
+	 * Return Command with the given key.
 	 * @param String
 	 * @throws CloneNotSupportedException 
 	 */
@@ -49,7 +58,8 @@ public class CommandFactory {
 	}
 
 	/**
-	 * 
+	 * Return list off all suitable commands.
+	 * @return List off all suitable commands.
 	 * @param CommandType
 	 */
 	public List<IPlotterCommand> getCommands(CommandType type) {
@@ -66,7 +76,7 @@ public class CommandFactory {
 	}
 
 	/**
-	 * 
+	 * Load commands from file.
 	 * @param String
 	 */
 	@SuppressWarnings("unchecked")
@@ -87,7 +97,7 @@ public class CommandFactory {
 	}
 
 	/**
-	 * 
+	 * Saves commands to file.
 	 * @param String
 	 */
 	public void exportCommands(String filePath) {
@@ -100,6 +110,10 @@ public class CommandFactory {
 		}
 	}
 
+	/**
+	 * Return reference to CommandFactory instance.
+	 * @return Reference to CommandFactory instance.
+	 */
 	public static CommandFactory getInstance() {
 		return instance;
 	}

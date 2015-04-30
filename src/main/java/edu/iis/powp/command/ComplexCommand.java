@@ -5,6 +5,11 @@ import java.util.List;
 
 import edu.iis.client.plottermagic.IPlotter;
 
+/**
+ * ComplexCommand subtype of IPlotterCommand, contains one or more basic commands.
+ * @author Grupa 6
+ * @see CommandBuilder, IPlotterCommand
+ */
 public class ComplexCommand implements IPlotterCommand, Serializable {
 
 	/**
