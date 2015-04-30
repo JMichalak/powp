@@ -15,7 +15,7 @@ public class ComplexCommand implements IPlotterCommand, Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6696376212824058299L;
 	private List<IPlotterCommand> commands;
 
 	public ComplexCommand(List<IPlotterCommand> commands) {
