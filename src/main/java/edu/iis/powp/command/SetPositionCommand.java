@@ -25,5 +25,16 @@ public class SetPositionCommand implements IPlotterCommand, Serializable {
 	public void execute(IPlotter plotter) {
 		plotter.setPosition(posX, posY);
 	}
-
+	
+	public SetPositionCommand clone(){
+		
+		try {
+			return (SetPositionCommand) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 }

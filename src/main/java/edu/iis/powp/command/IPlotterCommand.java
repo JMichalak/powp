@@ -5,7 +5,7 @@ import edu.iis.client.plottermagic.IPlotter;
 /**
  * PlotterCommand interface.
  */
-public interface IPlotterCommand {
+public interface IPlotterCommand extends Cloneable {
 
     /**
      * Execute command on plotter.
@@ -13,5 +13,10 @@ public interface IPlotterCommand {
      * @param plotter plotter.
      */
 	public void execute(IPlotter plotter);
+
+	public IPlotterCommand clone();
+
+	//public IPlotterCommand clone();
+	
 	
 }

@@ -31,7 +31,16 @@ public class CommandFactory {
 		commandsSet = new HashMap<>();
 	}
 	
-
+	public List<String> getKeys() {
+		
+		List<String> keys = new ArrayList<>();
+		commandsSet.forEach((k, v)->{
+			keys.add(k);
+		});
+		return keys;
+		
+	}
+	
 	/**
 	 * Allows to add new command.
 	 * @param key
@@ -39,7 +48,7 @@ public class CommandFactory {
 	 * @param type
 	 */
 	public void addCommand(String key, IPlotterCommand command, CommandType type) {
-		commandsSet.put(key, new CommandStruct(command, type));
+		commandsSet.put(key, new CommandStruct(command.clone(), type));
 	}
 
 	/**
@@ -49,11 +58,7 @@ public class CommandFactory {
 	 */
 	public IPlotterCommand getCommand(String key){
 		IPlotterCommand command = null;
-		try {
-			command = commandsSet.get(key).clone().getCommand();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		command = commandsSet.get(key).getCommand().clone();
 		return command;
 	}
 
@@ -67,7 +72,7 @@ public class CommandFactory {
 		commandsSet.forEach((k, v) -> {
 			if (v.getType().equals(type))
 				try {
-					commands.add(v.clone().getCommand());
+					commands.add(v.getCommand().clone());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

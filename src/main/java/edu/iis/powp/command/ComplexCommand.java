@@ -1,6 +1,7 @@
 package edu.iis.powp.command;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.iis.client.plottermagic.IPlotter;
@@ -28,4 +29,15 @@ public class ComplexCommand implements IPlotterCommand, Serializable {
 			command.execute(plotter);
 	}
 
+	public ComplexCommand clone() {
+		
+		List<IPlotterCommand> commands = new ArrayList<>();
+		this.commands.forEach((v)->{
+			commands.add(v.clone());
+		});
+		return new ComplexCommand(commands);
+		
+	}
+	
 }
+	

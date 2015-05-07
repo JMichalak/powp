@@ -9,9 +9,6 @@ import edu.iis.client.plottermagic.IPlotter;
  */
 public class DrawToCommand implements IPlotterCommand, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5367268041510251262L;
 	private int posX, posY;
 	
@@ -26,4 +23,15 @@ public class DrawToCommand implements IPlotterCommand, Serializable {
 		plotter.drawTo(posX, posY);
 	}
 
+	public DrawToCommand clone() {
+		
+		try {
+			return (DrawToCommand) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 }
