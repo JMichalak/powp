@@ -182,70 +182,15 @@ public class TestFactory {
 			}
 		}, false);
 		
-		context.addTest("Test 1", new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				factory.getCommand("test1").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-			}
-			
-		});	        
-
-		context.addTest("Znaczek", new ActionListener()
-		{
-		    @Override
-		    public void actionPerformed(ActionEvent e)
-		    {
-				factory.getCommand("znaczek").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-		    }
+		factory.commandsSet.forEach((k, v)->{
+			context.addTest(k, new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					v.getCommand().execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
+				}
+			});
 		});
-		
-
-		context.addTest("Test 2", new ActionListener()
-		{
-		    @Override
-		    public void actionPerformed(ActionEvent e)
-		    {
-				factory.getCommand("test2").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-		    }
-		});
-		
-		context.addTest("Kolko", new ActionListener()
-		{
-		    @Override
-		    public void actionPerformed(ActionEvent e)
-		    {
-				factory.getCommand("kolko").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-		    }
-		});
-		
-		context.addTest("SinModify", new ActionListener()
-		{
-		    @Override
-		    public void actionPerformed(ActionEvent e)
-		    {
-				factory.getCommand("SinModify").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-		    }
-		});
-		
-		context.addTest("Tangens", new ActionListener()
-		{
-		    @Override
-		    public void actionPerformed(ActionEvent e)
-		    {
-				factory.getCommand("Tangens").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-		    }
-		});
-		
-		context.addTest("Sinus", new ActionListener()
-		{
-		    @Override
-		    public void actionPerformed(ActionEvent e)
-		    {
-				factory.getCommand("Sinus").execute(Application.getComponent(DriverManager.class).getCurrentPlotter());
-		    }
-		});
-		
 		
 	}
 
