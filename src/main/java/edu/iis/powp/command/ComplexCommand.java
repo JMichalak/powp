@@ -2,6 +2,7 @@ package edu.iis.powp.command;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.iis.client.plottermagic.IPlotter;
@@ -11,7 +12,7 @@ import edu.iis.client.plottermagic.IPlotter;
  * @author Grupa 6
  * @see CommandBuilder, IPlotterCommand
  */
-public class ComplexCommand implements IPlotterCommand, Serializable {
+public class ComplexCommand implements ICompoundCommand, IPlotterCommand, Serializable {
 
 	/**
 	 * 
@@ -38,6 +39,10 @@ public class ComplexCommand implements IPlotterCommand, Serializable {
 		return new ComplexCommand(commands);
 		
 	}
+
+	@Override
+	public Iterator<IPlotterCommand> iterator() {
+		return commands.iterator();
+	}
 	
 }
-	

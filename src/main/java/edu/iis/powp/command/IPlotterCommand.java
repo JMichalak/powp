@@ -16,7 +16,7 @@ public interface IPlotterCommand extends Cloneable {
 
 	public IPlotterCommand clone();
 
-	//public IPlotterCommand clone();
+//	public IPlotterCommand clone();
 	
 	
 }
